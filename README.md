@@ -1,50 +1,50 @@
 # ПОРТФОЛИО 
 
 # Python
-# [Прогнозирование оттока сотрудников (IBM HR Analytics)](https://docs.google.com/document/d/1IIOorqCRiVBa7aN-TZn1yZErLQ168GWa/edit?usp=drive_link&ouid=103359712341031610406&rtpof=true&sd=true)
+[Прогнозирование оттока сотрудников (IBM HR Analytics)](https://docs.google.com/document/d/1IIOorqCRiVBa7aN-TZn1yZErLQ168GWa/edit?usp=drive_link&ouid=103359712341031610406&rtpof=true&sd=true)
 Разработана система моделей машинного обучения для прогнозирования оттока сотрудников на основе датасета IBM HR Analytics (1470 записей, 35 признаков). Проведён разведочный анализ, предобработка и кодирование категориальных признаков. Обучены 4 модели: логистическая регрессия, дерево решений, случайный лес, CatBoost. Лучшая — логистическая регрессия (recall = 0.766, AUC-ROC = 0.812). Построены матрицы ошибок, ROC-кривая, график важности признаков.
 
 [Код](https://github.com/va-goncharova/portfolio/blob/main/employee_churn_prediction.py)
 
-# [Логистическая регрессия](https://github.com/va-goncharova/portfolio/blob/main/logistic_regression.py)
+[Логистическая регрессия](https://github.com/va-goncharova/portfolio/blob/main/logistic_regression.py)
 Реализация алгоритма логистической регрессии с нуля без использования готовых библиотек. Написан базовый класс SGD с методом градиентного спуска, от которого унаследован класс LogReg с реализацией сигмоидальной функции и вычислением градиента. Модель обучена на синтетических данных, достигнута точность 97%. Построена визуализация границы решения. Технологии: Python, numpy, matplotlib.
 
 # SQL
-# [База данных для магазина «Бытовая химия»](https://docs.google.com/document/d/1LzYCXXPjvZml7kWidEGoiF9ob2l1Zjy7/edit?usp=drive_link&ouid=103359712341031610406&rtpof=true&sd=true)
+[База данных для магазина «Бытовая химия»](https://docs.google.com/document/d/1LzYCXXPjvZml7kWidEGoiF9ob2l1Zjy7/edit?usp=drive_link&ouid=103359712341031610406&rtpof=true&sd=true)
 Спроектирована реляционная БД: 9 сущностей, ER-диаграмма, 10 нормализованных таблиц. Написаны SQL-скрипты для PostgreSQL: создание таблиц, ограничения целостности (CHECK, UNIQUE, FOREIGN KEY), триггер обновления остатков, представления (VIEW), индексы, аналитические запросы (топ-5 товаров, клиенты с покупками, товары для заказа).
 
 [Код](https://github.com/va-goncharova/portfolio/blob/main/household_chemicals_store_db.sql)
 
-# [SQL функции для книжного магазина](https://github.com/va-goncharova/portfolio/blob/main/bookstore.sql)
+[SQL функции для книжного магазина](https://github.com/va-goncharova/portfolio/blob/main/bookstore.sql)
 Реализована функция расчёта стоимости заказа с прогрессивной скидкой (до 20% в зависимости от количества), функция получения статистики по книге с возвратом остатков и дат поставок, а также функция ранжирования топ-книг по остаткам. Дополнительно написана процедура архивации старых записей с использованием курсоров и транзакций.
 
 # Визуализация
-# [Анализ рынка недвижимости (Ames Housing) в Loginom](https://docs.google.com/document/d/1iIq5EQDDlImiCrM_1tsKKwWxaO6AFAa_/edit?usp=drive_link&ouid=103359712341031610406&rtpof=true&sd=true)
+[Анализ рынка недвижимости (Ames Housing) в Loginom](https://docs.google.com/document/d/1iIq5EQDDlImiCrM_1tsKKwWxaO6AFAa_/edit?usp=drive_link&ouid=103359712341031610406&rtpof=true&sd=true)
 Проведён анализ факторов ценообразования (2930 записей, 81 признак) в Loginom Community Edition. Выполнены очистка, создание вычисляемых полей, группировка, корреляционный анализ. Выявлены ключевые факторы: OverallQual (0.80), GrLivArea (0.71), AgeAtSale (−0.56). Построены гистограмма, диаграмма по районам, динамика по годам.
 
 # Моделирование и проектирование
-# [Моделирование бизнес-процесса «Управление услугами цифровой трансформации бизнеса» (X5)](https://docs.google.com/document/d/18xJUzcvA4kvymOHUBXV_zdVASujnMc-q/edit?usp=drive_link&ouid=103359712341031610406&rtpof=true&sd=true)
+[Моделирование бизнес-процесса «Управление услугами цифровой трансформации бизнеса» (X5)](https://docs.google.com/document/d/18xJUzcvA4kvymOHUBXV_zdVASujnMc-q/edit?usp=drive_link&ouid=103359712341031610406&rtpof=true&sd=true)
 Проведено исследование и моделирование сквозного процесса на примере X5. Построены оргструктура, карта процессов, цепочка создания ценности по Портеру. Разработана контекстная диаграмма IDEF0 (A-0) и BPMN-модель с тремя дорожками и тремя шлюзами. Описан полный жизненный цикл цифрового решения.
 
-# [UML-модель ИС для ИТ-компании «Техфорвард»](https://docs.google.com/document/d/1ES0tVMVFy4iPdyCJXUbGRFFQ0X5b-91o/edit?usp=drive_link&ouid=103359712341031610406&rtpof=true&sd=true)
+[UML-модель ИС для ИТ-компании «Техфорвард»](https://docs.google.com/document/d/1ES0tVMVFy4iPdyCJXUbGRFFQ0X5b-91o/edit?usp=drive_link&ouid=103359712341031610406&rtpof=true&sd=true)
 Разработана полная UML-модель: диаграммы бизнес-прецедентов, прецедентов, классов, последовательности и деятельности. Составлены спецификации 9 бизнес- и 13 системных прецедентов. Сформулированы требования по FURPS+ с атрибутами RUP. Разработаны классы (Договор, Шаблон, Форма_запроса, Заявка, Прайс-лист, Услуга, Обработчик_запросов).
 
-# [Анализ процесса «От Заказа До Оплаты» (ОАО «Концерн «Гранит-Электрон»)](https://docs.google.com/document/d/1R1ZLH8ca-84hkX2kvL5T8D8F5KC-DqfX/edit?usp=drive_link&ouid=103359712341031610406&rtpof=true&sd=true)
+[Анализ процесса «От Заказа До Оплаты» (ОАО «Концерн «Гранит-Электрон»)](https://docs.google.com/document/d/1R1ZLH8ca-84hkX2kvL5T8D8F5KC-DqfX/edit?usp=drive_link&ouid=103359712341031610406&rtpof=true&sd=true)
 Построена UML-диаграмма деятельности «Как есть» и «Как должен быть». Выявлены нарушения управляемости и наблюдаемости, предложен владелец процесса. Проведён анализ влияния на KPI «Эксплуатационная готовность» по ГОСТ Р ИСО 22400-2-2019.
 
-# [Анализ процессов ИТ-компании в BPMN, IDEF0] (https://drive.google.com/file/d/1L66R9c0vacY3e0azRWmQG5OS6PypAH--/view?usp=drive_link)
+[Анализ процессов ИТ-компании в BPMN, IDEF0](https://drive.google.com/file/d/1L66R9c0vacY3e0azRWmQG5OS6PypAH--/view?usp=drive_link)
 Построена контекстная диаграмма IDEF0 (A-0) и декомпозиция A0 для процесса «Разработка рекламы на заказ» (8 блоков). Определены входы, выходы, управление, механизмы. Детализированы блоки A1 (A11–A13) и A2 (A21–A23).
 
-# [Моделирование бизнес-процесса «Поиск кандидатов на вакансию» в BPMN](https://drive.google.com/file/d/1hN774a_j_kA54LoNr6zjmDjRY0aNnJIT/view?usp=drive_link)
+[Моделирование бизнес-процесса «Поиск кандидатов на вакансию» в BPMN](https://drive.google.com/file/d/1hN774a_j_kA54LoNr6zjmDjRY0aNnJIT/view?usp=drive_link)
 Разработана BPMN-модель процесса поиска кандидатов. Выявлены недостатки исходной модели, добавлен сценарий разветвления после задачи «Оценить заявку» с двумя альтернативными ветвями. Составлено текстовое описание, построена новая BPMN-диаграмма.
 
-# [Аналитика и исследование ИС](https://docs.google.com/document/d/1T0QBdjwTdmaGd2Mefyb1UlTtchuS2YUM/edit?usp=drive_link&ouid=103359712341031610406&rtpof=true&sd=true)
+[Аналитика и исследование ИС](https://docs.google.com/document/d/1T0QBdjwTdmaGd2Mefyb1UlTtchuS2YUM/edit?usp=drive_link&ouid=103359712341031610406&rtpof=true&sd=true)
 Описание классов ИС (EPMS, WFMS) и анализ кейсов
 Описаны два класса ИС для проектной организации по 7 разрезам. Сформированы 8 кейсов (по 4 категориям для каждого класса) на основе tadviser.ru и cnews.ru. Каждый кейс включает аннотацию и ответы на 4 категории вопросов.
 
-# [Сравнение СЭД-решений для проектной организации](https://docs.google.com/document/d/1p5PC7qTQk-njB3UuUQY1qB6G04e0WvUq/edit?usp=drive_link&ouid=103359712341031610406&rtpof=true&sd=true)
+[Сравнение СЭД-решений для проектной организации](https://docs.google.com/document/d/1p5PC7qTQk-njB3UuUQY1qB6G04e0WvUq/edit?usp=drive_link&ouid=103359712341031610406&rtpof=true&sd=true)
 Сравнены ELMA365 ECM и 1С:Документооборот по 18 функциям с оценками 0–10. Обоснования подтверждены отзывами и ссылками. Определён лидер — ELMA365 ECM. Описаны 5 проектов внедрения и преимущества для организации.
 
 # Интерактивные приложения
-# [Интерактивная визуализация функции на R/Shiny](https://github.com/va-goncharova/portfolio/blob/main/function_visualization.Rmd)
+[Интерактивная визуализация функции на R/Shiny](https://github.com/va-goncharova/portfolio/blob/main/function_visualization.Rmd)
 Разработаны 8 Shiny-приложений для графика f(x) = (x+3)²·sin(x−2)/1000. Реализованы: sidebarLayout, fluidRow+column, валидация, два графика, выбор цвета, толщины, типа графика, символа и размера точек. Использованы reactive и вспомогательные функции xdata, mfun, drawfun, drawfun1, drawfun2.
