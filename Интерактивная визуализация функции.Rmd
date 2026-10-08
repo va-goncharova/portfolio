@@ -1,0 +1,742 @@
+```{r}
+# == Задание 1 ==
+source(file = 'gr_funs.R', encoding = 'UTF-8')
+
+library(shiny)
+
+ui <- fluidPage(
+  titlePanel(title = "Графический анализ функции",
+    windowTitle = 'Графический анализ'),
+  
+  sidebarLayout(
+    sidebarPanel(
+      width = 3,
+      tags$br(),
+      numericInput(
+        inputId = 'xmin',
+        label = 'Левая граница',
+        value = -20,
+        min = -1000000,
+        max = 1000000
+      ),
+      numericInput(
+        inputId = 'xmax',
+        label = 'Правая граница',
+        value = 20,
+        min = -1000000,
+        max = 1000000
+      ),
+      sliderInput(
+        inputId = 'npoint',
+        label = 'К-во точек для построения графика',
+        min = 5,
+        max = 800,
+        value = 200,
+        step = 1,
+        ticks = T
+      )
+    ),
+    
+    mainPanel(
+      width = 9,
+      plotOutput(outputId = 'plot', height = '600px')
+    )
+  )
+)
+
+server <- function(input, output) {
+    xgr <- reactive({
+    xdata(xmin = input$xmin, xmax = input$xmax, n = input$npoint)
+    })
+    
+    ygr <- reactive({
+    mfun(x = xgr())
+    })
+    
+    plot <- reactive({
+      drawfun(xplot = xgr(),
+              yplot = ygr(),
+              mainText = 'f(x) = (x+3)^2 * sin(x-2) / 1000')
+    })
+    
+    output$plot <- renderPlot(expr = {plot()}, res = 72, height = 600)
+}
+
+shinyApp(ui = ui, server = server)
+```
+
+```{r}
+# == Задание 2 ==
+ui <- fluidPage(
+    titlePanel(title = "Графический анализ функции",
+    windowTitle = 'Графический анализ'),
+    
+    fluidRow(
+        column(8,
+               plotOutput(outputId = 'plot')
+        ),
+        
+        column(4,
+               tags$br(),
+               numericInput(
+                   inputId = 'xmin',
+                   label = 'Левая граница',
+                   value = -20,
+                   min = -1000000,
+                   max = 1000000
+               ),
+               numericInput(
+                   inputId = 'xmax',
+                   label = 'Правая граница',
+                   value = 20,
+                   min = -1000000,
+                   max = 1000000
+               ),
+               sliderInput(
+                   inputId = 'npoint',
+                   label = 'К-во точек для построения графика',
+                   min = 5,
+                   max = 800,
+                   value = 200,
+                   step = 1,
+                   ticks = T
+               )
+        )
+    )
+)
+server <- function(input, output) {
+    xgr <- reactive({
+        xdata(xmin = input$xmin, xmax = input$xmax, n = input$npoint)
+    })
+    ygr <- reactive({
+        mfun(x = xgr())
+    })
+    output$plot <- renderPlot({
+        drawfun(xplot = xgr(),
+                yplot = ygr(),
+                mainText = 'f(x) = (x+3)^2 * sin(x-2) / 1000')
+    }, res = 72)
+}
+
+shinyApp(ui = ui, server = server)
+```
+
+```{r}
+# == Задание 3 ==
+source(file = 'gr_funs.R', encoding = 'UTF-8')
+
+library(shiny)
+
+ui <- fluidPage(
+    titlePanel(title = "Графический анализ функции",
+    windowTitle = 'Графический анализ'),
+    
+    fluidRow(
+        column(12,
+               plotOutput(outputId = 'plot', height = '500px')
+        )
+    ),
+    
+    fluidRow(
+        column(4,
+               numericInput(
+                   inputId = 'xmin',
+                   label = 'Левая граница',
+                   value = -20,
+                   min = -100,
+                   max = 100
+               )
+        ),
+        column(4,
+               numericInput(
+                   inputId = 'xmax',
+                   label = 'Правая граница',
+                   value = 20,
+                   min = -100,
+                   max = 100
+               )
+        ),
+        column(4,
+               sliderInput(
+                   inputId = 'npoint',
+                   label = 'К-во точек для графика',
+                   min = 50,
+                   max = 500,
+                   value = 200,
+                   step = 10,
+                   ticks = TRUE
+               )
+        )
+    )
+)
+
+server <- function(input, output) {
+    
+    x_values <- reactive({
+        xdata(xmin = input$xmin, 
+              xmax = input$xmax, 
+              n = input$npoint)
+    })
+    
+    y_values <- reactive({
+        mfun(x_values())
+    })
+    
+    output$plot <- renderPlot({
+        if(input$xmin >= input$xmax) {
+            plot(1, type = "n", xlab = "", ylab = "", 
+                 main = "Ошибка: левая граница должна быть меньше правой")
+            return()
+        }
+        
+        drawfun(
+            xplot = x_values(),
+            yplot = y_values(),
+            mainText = 'f(x) = (x+3)^2 * sin(x-2) / 1000'
+        )
+    }, height = 500, res = 72)
+}
+
+shinyApp(ui = ui, server = server)
+```
+
+```{r}
+# == Задание 4 ==
+source(file = 'gr_funs.R', encoding = 'UTF-8')
+
+library(shiny)
+
+ui <- fluidPage(
+    titlePanel(title = "Графический анализ функции",
+    windowTitle = 'Графический анализ'),
+    
+    fluidRow(
+        column(12,
+               sliderInput(
+                   inputId = 'npoint',
+                   label = 'Количество точек для построения графика',
+                   min = 50,
+                   max = 500,
+                   value = 200,
+                   step = 10,
+                   ticks = TRUE,
+                   width = '100%'
+               )
+        )
+    ),
+    
+    fluidRow(
+        column(3,
+               numericInput(
+                   inputId = 'xmin',
+                   label = 'Левая граница',
+                   value = -20,
+                   min = -100,
+                   max = 100,
+                   width = '100%'
+               )
+        ),
+        
+        column(6,
+               plotOutput(outputId = 'plot', height = '500px')
+        ),
+        
+        column(3,
+               numericInput(
+                   inputId = 'xmax',
+                   label = 'Правая граница',
+                   value = 20,
+                   min = -100,
+                   max = 100,
+                   width = '100%'
+               )
+        )
+    )
+)
+
+server <- function(input, output) {
+    
+    x_values <- reactive({
+        xdata(xmin = input$xmin, 
+              xmax = input$xmax, 
+              n = input$npoint)
+    })
+    
+    y_values <- reactive({
+        mfun(x_values())
+    })
+    
+    output$plot <- renderPlot({
+        if(input$xmin >= input$xmax) {
+            plot(1, type = "n", xlab = "", ylab = "", 
+                 main = "Ошибка: левая граница должна быть меньше правой")
+            return()
+        }
+        
+        drawfun(
+            xplot = x_values(),
+            yplot = y_values(),
+            mainText = 'f(x) = (x+3)^2 * sin(x-2) / 1000'
+        )
+    }, height = 500, res = 72)
+}
+
+shinyApp(ui = ui, server = server)
+```
+
+```{r}
+# == Задание 5 ==
+source(file = 'gr_funs.R', encoding = 'UTF-8')
+
+library(shiny)
+
+ui <- fluidPage(
+    titlePanel(title = "Графический анализ функции",
+    windowTitle = 'Графический анализ'),
+    
+    fluidRow(
+        column(6,
+               plotOutput(outputId = 'plot1', height = '400px')
+        ),
+        
+        column(6,
+               plotOutput(outputId = 'plot2', height = '400px')
+        )
+    ),
+    
+    fluidRow(
+        column(4,
+               numericInput(
+                   inputId = 'xmin',
+                   label = 'Левая граница',
+                   value = -20,
+                   min = -100,
+                   max = 100
+               )
+        ),
+        column(4,
+               numericInput(
+                   inputId = 'xmax',
+                   label = 'Правая граница',
+                   value = 20,
+                   min = -100,
+                   max = 100
+               )
+        ),
+        column(4,
+               sliderInput(
+                   inputId = 'npoint',
+                   label = 'К-во точек для графиков',
+                   min = 50,
+                   max = 500,
+                   value = 200,
+                   step = 10,
+                   ticks = TRUE
+               )
+        )
+    )
+)
+
+server <- function(input, output) {
+    
+    x_values <- reactive({
+        xdata(xmin = input$xmin, 
+              xmax = input$xmax, 
+              n = input$npoint)
+    })
+    
+    y_values <- reactive({
+        mfun(x_values())
+    })
+    
+    output$plot1 <- renderPlot({
+        drawfun(
+            xplot = x_values(),
+            yplot = y_values(),
+            mainText = 'График 1: f(x) = (x+3)^2 * sin(x-2) / 1000'
+        )
+    }, height = 400, res = 72)
+    
+    output$plot2 <- renderPlot({
+        drawfun(
+            xplot = x_values(),
+            yplot = y_values(),
+            mainText = 'График 2: f(x) = (x+3)^2 * sin(x-2) / 1000'
+        )
+    }, height = 400, res = 72)
+}
+
+shinyApp(ui = ui, server = server)
+```
+
+```{r}
+# == Задание 6 ==
+source(file = 'gr_funs.R', encoding = 'UTF-8')
+
+library(shiny)
+
+ui <- fluidPage(
+    titlePanel(title = "Графический анализ функции",
+    windowTitle = 'Графический анализ'),
+    
+    fluidRow(
+        column(6,
+               plotOutput(outputId = 'plot1', height = '400px')
+        ),
+        
+        column(6,
+               plotOutput(outputId = 'plot2', height = '400px')
+        )
+    ),
+    
+    fluidRow(
+        column(2,
+               numericInput(
+                   inputId = 'xmin',
+                   label = 'Левая граница',
+                   value = -20,
+                   min = -100,
+                   max = 100
+               )
+        ),
+        column(2,
+               numericInput(
+                   inputId = 'xmax',
+                   label = 'Правая граница',
+                   value = 20,
+                   min = -100,
+                   max = 100
+               )
+        ),
+        column(3,
+               sliderInput(
+                   inputId = 'npoint',
+                   label = 'К-во точек для графиков',
+                   min = 50,
+                   max = 500,
+                   value = 200,
+                   step = 10,
+                   ticks = TRUE
+               )
+        ),
+        column(3,
+               selectInput(
+                   inputId = 'line_color',
+                   label = 'Цвет линии графика',
+                   choices = c(
+                       'Красный' = 'red',
+                       'Синий' = 'blue',
+                       'Зеленый' = 'green',
+                       'Фиолетовый' = 'purple',
+                       'Оранжевый' = 'orange',
+                       'Черный' = 'black'
+                   ),
+                   selected = 'red'
+               )
+        )
+    )
+)
+
+server <- function(input, output) {
+    
+    x_values <- reactive({
+        xdata(xmin = input$xmin, 
+              xmax = input$xmax, 
+              n = input$npoint)
+    })
+    
+    y_values <- reactive({
+        mfun(x_values())
+    })
+    
+    output$plot1 <- renderPlot({
+        drawfun1(
+            xplot = x_values(),
+            yplot = y_values(),
+            mainText = 'График 1: f(x) = (x+3)^2 * sin(x-2) / 1000',
+            line_color = input$line_color
+        )
+    }, height = 400, res = 72)
+    
+    output$plot2 <- renderPlot({
+        drawfun1(
+            xplot = x_values(),
+            yplot = y_values(),
+            mainText = 'График 2: f(x) = (x+3)^2 * sin(x-2) / 1000',
+            line_color = input$line_color
+        )
+    }, height = 400, res = 72)
+}
+
+shinyApp(ui = ui, server = server)
+```
+
+```{r}
+# == Задание 7 ==
+source(file = 'gr_funs.R', encoding = 'UTF-8')
+
+library(shiny)
+
+ui <- fluidPage(
+    titlePanel(title = "Графический анализ функции",
+    windowTitle = 'Графический анализ'),
+    
+    fluidRow(
+        column(6,
+               plotOutput(outputId = 'plot1', height = '400px')
+        ),
+        
+        column(6,
+               plotOutput(outputId = 'plot2', height = '400px')
+        )
+    ),
+    
+    fluidRow(
+        column(2,
+               numericInput(
+                   inputId = 'xmin',
+                   label = 'Левая граница',
+                   value = -20,
+                   min = -100,
+                   max = 100
+               )
+        ),
+        column(2,
+               numericInput(
+                   inputId = 'xmax',
+                   label = 'Правая граница',
+                   value = 20,
+                   min = -100,
+                   max = 100
+               )
+        ),
+        column(3,
+               sliderInput(
+                   inputId = 'npoint',
+                   label = 'К-во точек для графиков',
+                   min = 50,
+                   max = 500,
+                   value = 200,
+                   step = 10,
+                   ticks = TRUE
+               )
+        ),
+        column(3,
+               selectInput(
+                   inputId = 'line_color',
+                   label = 'Цвет линии графика',
+                   choices = c(
+                       'Красный' = 'red',
+                       'Синий' = 'blue',
+                       'Зеленый' = 'green',
+                       'Фиолетовый' = 'purple',
+                       'Оранжевый' = 'orange',
+                       'Черный' = 'black'
+                   ),
+                   selected = 'red'
+               )
+        ),
+        column(2,
+               numericInput(
+                   inputId = 'line_width',
+                   label = 'Толщина линии (lwd)',
+                   value = 3,
+                   min = 0.5,
+                   max = 10,
+                   step = 0.5
+               )
+        )
+    )
+)
+
+server <- function(input, output) {
+  
+    x_values <- reactive({
+        xdata(xmin = input$xmin, 
+              xmax = input$xmax, 
+              n = input$npoint)
+    })
+    
+    y_values <- reactive({
+        mfun(x_values())
+    })
+    
+    output$plot1 <- renderPlot({
+        drawfun1(
+            xplot = x_values(),
+            yplot = y_values(),
+            mainText = 'График 1: f(x) = (x+3)^2 * sin(x-2) / 1000',
+            line_color = input$line_color,
+            line_width = input$line_width
+        )
+    }, height = 400, res = 72)
+    
+    output$plot2 <- renderPlot({
+        drawfun1(
+            xplot = x_values(),
+            yplot = y_values(),
+            mainText = 'График 2: f(x) = (x+3)^2 * sin(x-2) / 1000',
+            line_color = input$line_color,
+            line_width = input$line_width
+        )
+    }, height = 400, res = 72)
+}
+
+shinyApp(ui = ui, server = server)
+```
+
+```{r}
+# == Задание 8 ==
+source(file = 'gr_funs.R', encoding = 'UTF-8')
+
+library(shiny)
+
+ui <- fluidPage(
+    titlePanel(title = "Графический анализ функции",
+    windowTitle = 'Графический анализ'),
+    
+    fluidRow(
+        column(6,
+               plotOutput(outputId = 'plot1', height = '400px')
+        ),
+        
+        column(6,
+               plotOutput(outputId = 'plot2', height = '400px')
+        )
+    ),
+  
+    fluidRow(
+        column(2,
+               numericInput(
+                   inputId = 'xmin',
+                   label = 'Левая граница',
+                   value = -20,
+                   min = -100,
+                   max = 100
+               )
+        ),
+        column(2,
+               numericInput(
+                   inputId = 'xmax',
+                   label = 'Правая граница',
+                   value = 20,
+                   min = -100,
+                   max = 100
+               )
+        ),
+        column(2,
+               sliderInput(
+                   inputId = 'npoint',
+                   label = 'К-во точек',
+                   min = 50,
+                   max = 500,
+                   value = 200,
+                   step = 10,
+                   ticks = TRUE
+               )
+        ),
+        column(2,
+               selectInput(
+                   inputId = 'line_color',
+                   label = 'Цвет',
+                   choices = c(
+                       'Красный' = 'red',
+                       'Синий' = 'blue',
+                       'Зеленый' = 'green',
+                       'Фиолетовый' = 'purple',
+                       'Оранжевый' = 'orange',
+                       'Черный' = 'black'
+                   ),
+                   selected = 'red'
+               )
+        ),
+        column(2,
+               numericInput(
+                   inputId = 'line_width',
+                   label = 'Толщина линии',
+                   value = 3,
+                   min = 0.5,
+                   max = 10,
+                   step = 0.5
+               )
+        )
+    ),
+    
+    fluidRow(
+        column(3,
+               selectInput(
+                   inputId = 'plot_type',
+                   label = 'Тип графика (type)',
+                   choices = c(
+                       'Только линии' = 'l',
+                       'Только точки' = 'p',
+                       'Линии и точки' = 'b'
+                   ),
+                   selected = 'l'
+               )
+        ),
+        column(3,
+               numericInput(
+                   inputId = 'pch_symbol',
+                   label = 'Символ точек (pch)',
+                   value = 1,
+                   min = 0,
+                   max = 25,
+                   step = 1
+               )
+        ),
+        column(3,
+               sliderInput(
+                   inputId = 'symbol_size',
+                   label = 'Размер символа (cex)',
+                   min = 0.5,
+                   max = 5,
+                   value = 1,
+                   step = 0.1,
+                   ticks = TRUE
+               )
+        )
+    )
+)
+
+server <- function(input, output) {
+    
+    x_values <- reactive({
+        xdata(xmin = input$xmin, 
+              xmax = input$xmax, 
+              n = input$npoint)
+    })
+    
+    y_values <- reactive({
+        mfun(x_values())
+    })
+    
+    output$plot1 <- renderPlot({
+        drawfun2(
+            xplot = x_values(),
+            yplot = y_values(),
+            mainText = 'График 1: f(x) = (x+3)^2 * sin(x-2) / 1000',
+            line_color = input$line_color,
+            line_width = input$line_width,
+            plot_type = input$plot_type,
+            pch_symbol = input$pch_symbol,
+            symbol_size = input$symbol_size
+        )
+    }, height = 400, res = 72)
+    
+    output$plot2 <- renderPlot({
+        drawfun2(
+            xplot = x_values(),
+            yplot = y_values(),
+            mainText = 'График 2: f(x) = (x+3)^2 * sin(x-2) / 1000',
+            line_color = input$line_color,
+            line_width = input$line_width,
+            plot_type = input$plot_type,
+            pch_symbol = input$pch_symbol,
+            symbol_size = input$symbol_size
+        )
+    }, height = 400, res = 72)
+}
+
+shinyApp(ui = ui, server = server)
+```
